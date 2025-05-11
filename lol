@@ -447,6 +447,41 @@ local LocalPlayer = game.Players.LocalPlayer
 local PlayerName = LocalPlayer.Name
 local PlayerUserId = LocalPlayer.UserId
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerBrowser = ReplicatedStorage:WaitForChild("__ServerBrowser")
+
+local function getName(jobId)
+    local assshit = {
+        "Big", "Small", "Large", "Strong", "Powerful", "Weak", "Overpowered", "Bad", "Odd", "Rich",
+        "Short", "Adorable", "Alive", "Colorful", "Angry", "Good", "Beautiful", "Ugly", "Hot", "Cold",
+        "Evil", "Famous", "Original", "Unoriginal", "Kind", "Nice", "Real", "Expensive", "Wild", "Wide",
+        "Fake", "Proud", "Super", "Strange", "Wrong", "Right", "Talented", "Complex", "Pure", "Fancy",
+        "Lucky", "Fresh", "Fantastic", "Dull", "Dizzy", "Eternal", "Mental", "Infinite", "Rogue"
+    }
+    
+    local pussy = {
+        "TAWG", "Robson", "Krazy", "Fruit", "Realm", "World", "Place", "Experience", "Dog", "Cat",
+        "Guy", "Bird", "Legion", "Gank", "Family", "Sun", "Moon", "Gun", "Sword", "Melee", "Defense",
+        "Bomb", "Spike", "Chop", "Spring", "Smoke", "Flame", "Ice", "Sand", "Dark", "Light", "Rubber",
+        "Barrier", "Magma", "Leopard", "Quake", "Buddha", "Spider", "Phoenix", "Rumble", "Love", "Door",
+        "Paw", "Gravity", "Dough", "Venom", "Control", "Dragon", "Falcon", "Diamond", "Kilo", "Shark",
+        "Human", "Angel", "Rabbit", "Spin", "Topic", "Red", "Blue", "Green", "Yellow", "Soul", "Shadow"
+    }
+    
+    local seed = tonumber("0x" .. jobId:gsub("-", ""):sub(1, 7)) or 0
+    local random = Random.new(seed)
+    local first = assshit[random:NextInteger(1, #assshit)]
+    local second = pussy[random:NextInteger(1, #pussy)]
+    local uniqueNumber = string.format("%04d", random:NextInteger(1, 9999))
+    return first .. " " .. second .. " #" .. uniqueNumber
+end
+
+local function getsrv()
+    local jobId = ServerBrowser:InvokeServer("getjob")
+    return jobId and getName(jobId) or "unknown err idk"
+end
+
+print("name:", getsrv()) -- << outprints the name of the server
+
 local Remote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_")
 local HttpService = game:GetService("HttpService")
 local isResettingEnabled = true
