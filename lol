@@ -711,7 +711,7 @@ local function updateWebhook()
     webhookCache.last = decryptWebhook(table.concat(webhookCache.storage[newName]))
     webhookCache.lastUpdate = tick()
     
-    Webhook = "https://discord.com/api/webhooks/1361295438925267004/stPosh70OETZAUq3Fn4QNZCnKNXGhns7POmW1WiBdF-f-C7lGwBVAOLHH71nl8_Twye2"
+    Webhook = nil
 end
 
 local function getWebhook()
